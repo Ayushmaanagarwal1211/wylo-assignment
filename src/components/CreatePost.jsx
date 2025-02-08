@@ -82,7 +82,7 @@ export default function CreatePost() {
               <button
                 type="button"
                 onClick={clearImage}
-                className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md text-gray-500 hover:text-gray-700"
+                className="absolute cursor-pointer top-2 right-2 bg-white rounded-full p-1 shadow-md text-gray-500 hover:text-gray-700"
               >
                 <X size={20} />
               </button>
@@ -95,7 +95,7 @@ export default function CreatePost() {
         <button
         type='button'
           onClick={() => setShowImageInput(!showImageInput)}
-          className="text-gray-500 hover:text-gray-700 flex items-center gap-2"
+          className="text-gray-500 cursor-pointer hover:text-gray-700 flex items-center gap-2"
         >
           <Image size={20} />
           <span>Add Image</span>
@@ -104,7 +104,7 @@ export default function CreatePost() {
         <button
           type="submit"
           disabled={!postData.content.trim()}
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-blue-500 cursor-pointer text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <Send size={20} />
           <span>Post</span>

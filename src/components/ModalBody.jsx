@@ -55,6 +55,7 @@ export default function ModalBody({ modalIsOpen, closeModal, children }) {
           animate={"isOpen"}
           exit={"exit"}
           variants={modalVariant}
+          
         >
           <ModalContainer variants={containerVariant}>
             <CloseButton

@@ -66,7 +66,7 @@ function EditingModalInnerBody({post,onClose}){
       
         <div className="flex justify-end">
           <button
-            className="px-4 py-2 text-white cursor-pointer bg-indigo-600 rounded-lg hover:bg-indigo-700 transition focus:ring-2 focus:ring-indigo-400"
+            className="px-4 cursor-pointer py-2 text-white cursor-pointer bg-indigo-600 rounded-lg hover:bg-indigo-700 transition focus:ring-2 focus:ring-indigo-400"
             onClick={handleSave}
           >
             Submit
@@ -106,14 +106,14 @@ export default function Post({ post }) {
           <div className="flex gap-3">
             <button
               onClick={() => setIsEditing(true)}
-              className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition"
+              className="p-2 rounded-lg cursor-pointer bg-gray-100 hover:bg-gray-200 transition"
               title="Edit Post"
             >
               <Pencil size={18} className="text-gray-600" />
             </button>
             <button
               onClick={handleDelete}
-              className="p-2 rounded-lg bg-red-100 hover:bg-red-200 transition"
+              className="p-2 rounded-lg cursor-pointer bg-red-100 hover:bg-red-200 transition"
               title="Delete Post"
             >
               <Trash2 size={18} className="text-red-600" />
