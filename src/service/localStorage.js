@@ -1,10 +1,10 @@
-export async function addPostToStorage(post){
+export  function addPostToStorage(post){
     const posts = JSON.parse(localStorage.getItem("posts") || '[]')
     posts.push(post)
     localStorage.setItem('posts',JSON.stringify(posts))
 }
 
-export async function editPostInStorage(post){
+export  function editPostInStorage(post){
     const posts = JSON.parse(localStorage.getItem("posts") || '[]')
     const index = posts.findIndex((currPost) => currPost.id == post.id);
     console.log(index,post)
@@ -13,7 +13,7 @@ export async function editPostInStorage(post){
       }
       localStorage.setItem("posts",JSON.stringify(posts))
 }
-export async function removePostFromStorage(id){
+export  function removePostFromStorage(id){
     let posts = JSON.parse(localStorage.getItem("posts") || '[]')
     posts = posts.filter((post)=>post.id !== id)
     localStorage.setItem('posts',JSON.stringify(posts))
