@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, {  useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addPost } from '../store/postSlice';
-import { Image, Send, X, Upload } from 'lucide-react';
+import { Image, Send, X } from 'lucide-react';
 import { addPostToStorage } from '../service/localStorage';
 
 export default function CreatePost() {
