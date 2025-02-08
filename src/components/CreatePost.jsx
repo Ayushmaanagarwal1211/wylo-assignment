@@ -20,7 +20,10 @@ export default function CreatePost() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!postData.content.trim()) return;
+    if (!postData.content.trim()){
+      toast("Please Add Title")
+      return 
+    };
 
     const newPost = {
       id: Date.now().toString(),

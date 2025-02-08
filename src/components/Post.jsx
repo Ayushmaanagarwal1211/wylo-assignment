@@ -12,7 +12,10 @@ function EditingModalInnerBody({post,onClose}){
     const dispatch = useDispatch()
 
     const handleSave = () => {
-        if (!editedContent.trim()) return;
+        if (!editedContent.trim()) {
+          toast("Please Add Title")
+          return 
+        };
         const updatedPost = {
             id:post.id,
             content: editedContent.trim(),
