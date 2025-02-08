@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Pencil, Trash2, X, Save, Upload } from 'lucide-react';
 import ModalBody from './ModalBody';
 import {  editPostInStorage, removePostFromStorage } from '../service/localStorage';
-import { deletePost,editPost } from '../store/postSlice';
+import { deletePost,editPost, toggleLoading } from '../store/postSlice';
 import { toast } from 'react-toastify';
 
 function EditingModalInnerBody({post,onClose}){
@@ -22,8 +22,10 @@ function EditingModalInnerBody({post,onClose}){
             imageUrl: editedImageUrl.trim() || undefined,
             updatedAt: new Date().toISOString(),
         }
+            dispatch(toggleLoading(true))
+        
+            editPostInStorage(updatedPost).then(res=>dispatch(toggleLoading(false)))
         dispatch(editPost(updatedPost));
-        editPostInStorage(updatedPost)
         toast("Post Edited Successfully")
         onClose();
       };
@@ -80,10 +82,10 @@ export default function Post({ post }) {
     const [isEditing, setIsEditing] = useState(false);
   
     const handleDelete = () => {
+          dispatch(toggleLoading(true))
+          removePostFromStorage(post.id).then(res=>dispatch(toggleLoading(false)))
       dispatch(deletePost(post.id));
-      removePostFromStorage(post.id)
       toast("Post Deleted Successfully")
-      
     };
   
     function closeModal() {

@@ -1,6 +1,6 @@
 import React, {  useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addPost } from '../store/postSlice';
+import { addPost, selectLoading, toggleLoading } from '../store/postSlice';
 import { Image, Send, X } from 'lucide-react';
 import { addPostToStorage } from '../service/localStorage';
 import { toast } from 'react-toastify';
@@ -33,8 +33,9 @@ export default function CreatePost() {
       updatedAt: new Date().toISOString(),
     };
 
+    dispatch(toggleLoading(true))
+    addPostToStorage(newPost).then(res=>dispatch(toggleLoading(false)))
     dispatch(addPost(newPost));
-    addPostToStorage(newPost)
     toast("Post Created Successfully")
     reset()
   };

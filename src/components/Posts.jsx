@@ -1,9 +1,10 @@
 import React from 'react'
 import Post from './Post';
 import { useSelector } from 'react-redux';
+import { selectPosts } from '../store/postSlice';
 
 export default function Posts() {
-    const posts = useSelector((state) => state.posts);
+    const posts = useSelector((state) => selectPosts(state));
 
     return (
       <div className="max-w-2xl  gap-[20px] mx-auto">

@@ -1,13 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CreatePost from "./components/CreatePost";
 import Posts from "./components/Posts";
-import { useDispatch } from "react-redux";
-import { setPost } from "./store/postSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectLoading, setPost } from "./store/postSlice";
 import { getAllPostsFromStorage } from "./service/localStorage";
 import { ToastContainer } from "react-toastify";
+import Spinner from "./components/Spinner";
 
 const App = () => {
   const dispatch = useDispatch()
+  const loading = useSelector(state=>selectLoading(state))
 
   useEffect(()=>{
     const posts = getAllPostsFromStorage()
@@ -16,6 +18,7 @@ const App = () => {
 
   return (
     <>
+   { loading && <Spinner/> }
     <ToastContainer className={'z-[10000]'}/>
     <div className="min-h-screen bg-gray-100 py-8 px-4">
         <div className="max-w-2xl mx-auto">
