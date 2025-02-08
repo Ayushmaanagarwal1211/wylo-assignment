@@ -83,10 +83,12 @@ export default function Post({ post }) {
       setIsEditing(false);
     }
     return (
-        <div  className="bg-white hover:scale-[1.01] transform-all duration-100 rounded-lg shadow-lg p-6 mb-6 border border-gray-200 transition hover:shadow-xl">
+      <>
+      
         <ModalBody modalIsOpen={isEditing} closeModal={closeModal}>
           <EditingModalInnerBody onClose={closeModal} post={post} />
         </ModalBody>
+        <div  className="bg-white hover:scale-[1.01] transform-all duration-100 rounded-lg shadow-lg p-6 mb-6 border border-gray-200 transition hover:shadow-xl">
       
         <div className="flex justify-between items-center mb-4">
           <p className="text-gray-500 text-sm font-medium">
@@ -122,6 +124,7 @@ export default function Post({ post }) {
           />
         )}
       </div>
+      </>
       
     )
 }
