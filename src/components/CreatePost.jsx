@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { addPost } from '../store/postSlice';
 import { Image, Send, X } from 'lucide-react';
 import { addPostToStorage } from '../service/localStorage';
+import { toast } from 'react-toastify';
 
 export default function CreatePost() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ export default function CreatePost() {
 
     dispatch(addPost(newPost));
     addPostToStorage(newPost)
+    toast("Post Created Successfully")
     reset()
   };
 

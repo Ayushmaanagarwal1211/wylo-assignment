@@ -4,6 +4,7 @@ import Posts from "./components/Posts";
 import { useDispatch } from "react-redux";
 import { setPost } from "./store/postSlice";
 import { getAllPostsFromStorage } from "./service/localStorage";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const dispatch = useDispatch()
@@ -14,6 +15,8 @@ const App = () => {
   },[])
 
   return (
+    <>
+    <ToastContainer/>
     <div className="min-h-screen bg-gray-100 py-8 px-4">
         <div className="max-w-2xl mx-auto">
           <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
@@ -23,6 +26,7 @@ const App = () => {
           <Posts />
         </div>
       </div>
+    </>
   )
    
 };
