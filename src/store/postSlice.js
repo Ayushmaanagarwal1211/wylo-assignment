@@ -12,7 +12,8 @@ export const postSlice = createSlice({
     },
 
     addPost: (state, action) => {
-      state.posts.push(action.payload);
+      const post = {...action.payload,comments : []}
+      state.posts.push(post);
     },
 
     editPost: (state, action) => {
@@ -25,6 +26,13 @@ export const postSlice = createSlice({
     },
     toggleLoading: (state,action)=>{
       state.loading = action.payload
+    },
+
+    addComment : (state,action)=>{
+      const {id,comment} = action.payload
+      const index = state.posts.findIndex(post => post.id == id)
+      state.posts[index].comments.push(comment) 
+      console.log(state.posts[index],index)
     }
   },
 });
@@ -36,5 +44,5 @@ export function selectPosts(state){
 export function selectLoading(state){
   return state.loading
 }
-export const { addPost, editPost, deletePost ,setPost, toggleLoading } = postSlice.actions;
+export const { addPost, editPost, deletePost ,setPost, toggleLoading,addComment } = postSlice.actions;
 export default postSlice.reducer;

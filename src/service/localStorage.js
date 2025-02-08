@@ -1,6 +1,6 @@
 export async  function addPostToStorage(post){
     const posts = JSON.parse(localStorage.getItem("posts") || '[]')
-    posts.push(post)
+    posts.push({...post,comments : []})
     await delay()
     localStorage.setItem('posts',JSON.stringify(posts))
 }
@@ -28,4 +28,12 @@ export async function removePostFromStorage(id){
 
 export  function getAllPostsFromStorage(){
     return JSON.parse(localStorage.getItem("posts") || '[]')
+}
+
+export function addCommentToService(id,comment){
+    let posts = JSON.parse(localStorage.getItem("posts") || '[]')
+      const index = posts.findIndex(post => post.id == id)
+      posts[index].comments.push(comment) 
+      localStorage.setItem('posts',JSON.stringify(posts))
+
 }

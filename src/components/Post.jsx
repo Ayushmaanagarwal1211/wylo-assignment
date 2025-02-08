@@ -2,8 +2,8 @@ import React,{useState,useEffect} from 'react'
 import { useDispatch } from 'react-redux';
 import { Pencil, Trash2, X, Save, Upload } from 'lucide-react';
 import ModalBody from './ModalBody';
-import {  editPostInStorage, removePostFromStorage } from '../service/localStorage';
-import { deletePost,editPost, toggleLoading } from '../store/postSlice';
+import {  addCommentToService, editPostInStorage, removePostFromStorage } from '../service/localStorage';
+import { addComment, deletePost,editPost, toggleLoading } from '../store/postSlice';
 import { toast } from 'react-toastify';
 
 function EditingModalInnerBody({post,onClose}){
@@ -80,7 +80,9 @@ function EditingModalInnerBody({post,onClose}){
 export default function Post({ post }) {
     const dispatch = useDispatch();
     const [isEditing, setIsEditing] = useState(false);
-  
+    const comments = post.comments || [];
+
+    const [newComment, setNewComment] = useState("");
     const handleDelete = () => {
           dispatch(toggleLoading(true))
           removePostFromStorage(post.id).then(res=>dispatch(toggleLoading(false)))
@@ -91,6 +93,14 @@ export default function Post({ post }) {
     function closeModal() {
       setIsEditing(false);
     }
+
+    const handleCommentSubmit = () => {
+      if (newComment.trim() === "") return;
+      dispatch(addComment({id:post.id, comment :newComment}))
+      addCommentToService(post.id,newComment)
+      setNewComment("");
+    };
+
     return (
       <>
       
@@ -132,7 +142,46 @@ export default function Post({ post }) {
             className="w-[15rem] m-auto  rounded-lg shadow-md "
           />
         )}
+
+<div className="mt-6">
+          <h3 className="text-gray-700 font-semibold mb-2">Comments</h3>
+          <div className="flex gap-2 mb-3">
+            <input
+              type="text"
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Add a comment..."
+              className="flex-grow p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
+            />
+            <button
+              onClick={handleCommentSubmit}
+              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+            >
+              Post
+            </button>
+          </div>
+
+          <ul className="space-y-2">
+            {comments.length > 0 ? (
+              comments.map((comment, index) => (
+                <li
+                  key={index}
+                  className="p-2 bg-gray-100 rounded-lg text-gray-800"
+                >
+                  {comment}
+                </li>
+              ))
+            ) : (
+              <p className="text-gray-500">No comments yet.</p>
+            )
+            }
+          </ul>
+        </div>
       </div>
+
+
+
+
       </>
       
     )
